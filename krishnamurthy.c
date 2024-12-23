@@ -1,19 +1,24 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-long int fatorial(int n)
+
+long int fatorial(long int d)
 {
-    if(n <= 1) return 1;
+    if(d <= 1) return 1;
 
-    return n * fatorial(n-1);
+    return d * fatorial(d-1);
 }
 
 bool check(int n)
 {
-    int sum = 0;
+    long int sum = 0;
+    long int aux = n;
 
-    while(n > 0) {
-        sum += fatorial(n % 10);
-        n /= 10;
+    while(aux > 0) {
+        sum += fatorial(aux % 10);
+        aux = aux / 10;
+
+        if (sum > n) return false;
     }
 
     return sum == n;
@@ -22,9 +27,14 @@ bool check(int n)
 
 int main() 
 {
-    for(int i = 1; i <= 1000000; i++){
+
+    for(long int i = 1; i <= 1000000000; i++){
         if(check(i)){
-            printf("%d is a Krishnamurthy number", i);
+            printf(" %ld is a Krishnamurthy number\n", i);
         }
     }
+
+
+
+    return 0;
 }
